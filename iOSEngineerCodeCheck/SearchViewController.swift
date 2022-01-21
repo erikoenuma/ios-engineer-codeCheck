@@ -43,13 +43,14 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         if searchWord.count != 0 {
             url = "https://api.github.com/search/repositories?q=\(searchWord!)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
-                if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = object["items"] as? [[String: Any]] {
-                        self.repositories = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }
+                guard let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
+                      let items = object["items"] as? [[String: Any]]
+                else {
+                    return
+                }
+                self.repositories = items
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
             }
             task?.resume()
