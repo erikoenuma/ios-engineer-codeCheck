@@ -12,7 +12,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var repositories: [[String : Any]] = []
+    var repositories: [RepositoryCodable] = []
     var task: URLSessionTask?
     var searchWord: String!
     var url: String!
@@ -43,12 +43,12 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         if searchWord.count != 0 {
             url = "https://api.github.com/search/repositories?q=\(searchWord!)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
-                guard let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
-                      let items = object["items"] as? [[String: Any]]
+                guard let data = data,
+                      let searchResult = try? JSONDecoder().decode(SearchResultCodable.self, from: data)
                 else {
                     return
                 }
-                self.repositories = items
+                self.repositories = searchResult.items
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -73,9 +73,9 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        let rp = repositories[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
+        let repository = repositories[indexPath.row]
+        cell.textLabel?.text = repository.fullName
+        cell.detailTextLabel?.text = repository.language ?? "-"
         cell.tag = indexPath.row
         return cell
         

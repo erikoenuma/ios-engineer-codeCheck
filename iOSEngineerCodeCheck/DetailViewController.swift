@@ -24,24 +24,21 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         let repository = vc1.repositories[vc1.index]
-        languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
-        stargazersLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-        watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
-        forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
-        issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
+        languageLabel.text = "Written in \(repository.language ?? "--")"
+        stargazersLabel.text = "\(repository.stargazersCount) stars"
+        watchersLabel.text = "\(repository.watchersCount) watchers"
+        forksLabel.text = "\(repository.forksCount) forks"
+        issuesLabel.text = "\(repository.openIssuesCount) open issues"
         getImage()
     }
     
     func getImage(){
         
         let repository = vc1.repositories[vc1.index]
-        titleLabel.text = repository["full_name"] as? String
+        titleLabel.text = repository.fullName
         
-        guard let owner = repository["owner"] as? [String: Any],
-              let imageUrl = owner["avatar_url"] as? String
-        else {
-            return
-        }
+        let owner = repository.owner
+        let imageUrl = owner.avatarUrl
         URLSession.shared.dataTask(with: URL(string: imageUrl)!) { (data, response, error) in
             let image = UIImage(data: data!)!
             DispatchQueue.main.async {
