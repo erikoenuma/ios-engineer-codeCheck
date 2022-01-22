@@ -12,9 +12,8 @@ final class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet private weak var searchBar: UISearchBar!
     
-    var repositories: [RepositoryCodable] = []
+    private var repositories: [RepositoryCodable] = []
     private var task: URLSessionTask?
-    var index: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +58,9 @@ final class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "Detail"{
-            let dtl = segue.destination as! DetailViewController
-            dtl.vc1 = self
+        if let vc = segue.destination as? DetailViewController,
+           let repository = sender as? RepositoryCodable {
+            vc.repository = repository
         }
     }
     
@@ -83,7 +82,6 @@ final class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        index = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        performSegue(withIdentifier: "Detail", sender: repositories[indexPath.row])
     }
 }

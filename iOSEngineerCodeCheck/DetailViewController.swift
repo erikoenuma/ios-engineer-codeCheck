@@ -18,12 +18,11 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var forksLabel: UILabel!
     @IBOutlet private weak var issuesLabel: UILabel!
     
-    var vc1: SearchViewController?
+    var repository: RepositoryCodable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repository = vc1?.repositories[vc1?.index ?? 0]
         languageLabel.text = "Written in \(repository?.language ?? "--")"
         stargazersLabel.text = "\(repository?.stargazersCount ?? 0) stars"
         watchersLabel.text = "\(repository?.watchersCount ?? 0) watchers"
@@ -34,7 +33,6 @@ final class DetailViewController: UIViewController {
     
     func getImage() {
         
-        let repository = vc1?.repositories[vc1?.index ?? 0]
         titleLabel.text = repository?.fullName
         
         let owner = repository?.owner
