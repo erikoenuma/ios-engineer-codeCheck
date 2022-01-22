@@ -14,9 +14,7 @@ final class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     var repositories: [RepositoryCodable] = []
     private var task: URLSessionTask?
-    private var searchWord: String!
-    private var url: String!
-    var index: Int!
+    var index: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,23 +36,25 @@ final class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        searchWord = searchBar.text!
-        
-        if searchWord.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(searchWord!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
-                guard let data = data,
-                      let searchResult = try? JSONDecoder().decode(SearchResultCodable.self, from: data)
-                else {
-                    return
-                }
-                self.repositories = searchResult.items
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-            task?.resume()
+        guard let searchWord = searchBar.text,
+              !searchWord.isEmpty,
+              let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)")
+        else {
+            return
         }
+        
+        task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data,
+                  let searchResult = try? JSONDecoder().decode(SearchResultCodable.self, from: data)
+            else {
+                return
+            }
+            self.repositories = searchResult.items
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        task?.resume()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -18,31 +18,37 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var forksLabel: UILabel!
     @IBOutlet private weak var issuesLabel: UILabel!
     
-    var vc1: SearchViewController!
+    var vc1: SearchViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repository = vc1.repositories[vc1.index]
-        languageLabel.text = "Written in \(repository.language ?? "--")"
-        stargazersLabel.text = "\(repository.stargazersCount) stars"
-        watchersLabel.text = "\(repository.watchersCount) watchers"
-        forksLabel.text = "\(repository.forksCount) forks"
-        issuesLabel.text = "\(repository.openIssuesCount) open issues"
+        let repository = vc1?.repositories[vc1?.index ?? 0]
+        languageLabel.text = "Written in \(repository?.language ?? "--")"
+        stargazersLabel.text = "\(repository?.stargazersCount ?? 0) stars"
+        watchersLabel.text = "\(repository?.watchersCount ?? 0) watchers"
+        forksLabel.text = "\(repository?.forksCount ?? 0) forks"
+        issuesLabel.text = "\(repository?.openIssuesCount ?? 0) open issues"
         getImage()
     }
     
     func getImage() {
         
-        let repository = vc1.repositories[vc1.index]
-        titleLabel.text = repository.fullName
+        let repository = vc1?.repositories[vc1?.index ?? 0]
+        titleLabel.text = repository?.fullName
         
-        let owner = repository.owner
-        let imageUrl = owner.avatarUrl
-        URLSession.shared.dataTask(with: URL(string: imageUrl)!) { (data, response, error) in
-            let image = UIImage(data: data!)!
+        let owner = repository?.owner
+        guard let imageUrl = owner?.avatarUrl,
+              let url = URL(string: imageUrl)
+        else {
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
             DispatchQueue.main.async {
-                self.avatarImageView.image = image
+                self.avatarImageView.image = UIImage(data: data)
             }
         }
         .resume()
