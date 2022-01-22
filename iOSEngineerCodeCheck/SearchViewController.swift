@@ -8,15 +8,12 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController, UISearchBarDelegate {
+final class SearchViewController: UITableViewController, UISearchBarDelegate {
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
-    var repositories: [[String : Any]] = []
-    var task: URLSessionTask?
-    var searchWord: String!
-    var url: String!
-    var index: Int!
+    private var repositories: [RepositoryCodable] = []
+    private var task: URLSessionTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,30 +35,32 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        searchWord = searchBar.text!
-        
-        if searchWord.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(searchWord!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
-                guard let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
-                      let items = object["items"] as? [[String: Any]]
-                else {
-                    return
-                }
-                self.repositories = items
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-            task?.resume()
+        guard let searchWord = searchBar.text,
+              !searchWord.isEmpty,
+              let url = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)")
+        else {
+            return
         }
+        
+        task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data,
+                  let searchResult = try? JSONDecoder().decode(SearchResultCodable.self, from: data)
+            else {
+                return
+            }
+            self.repositories = searchResult.items
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        task?.resume()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "Detail"{
-            let dtl = segue.destination as! DetailViewController
-            dtl.vc1 = self
+        if let vc = segue.destination as? DetailViewController,
+           let repository = sender as? RepositoryCodable {
+            vc.repository = repository
         }
     }
     
@@ -73,9 +72,9 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        let rp = repositories[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
+        let repository = repositories[indexPath.row]
+        cell.textLabel?.text = repository.fullName
+        cell.detailTextLabel?.text = repository.language ?? "-"
         cell.tag = indexPath.row
         return cell
         
@@ -83,7 +82,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        index = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        performSegue(withIdentifier: "Detail", sender: repositories[indexPath.row])
     }
 }

@@ -8,44 +8,45 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var languageLabel: UILabel!
-    @IBOutlet weak var stargazersLabel: UILabel!
-    @IBOutlet weak var watchersLabel: UILabel!
-    @IBOutlet weak var forksLabel: UILabel!
-    @IBOutlet weak var issuesLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var languageLabel: UILabel!
+    @IBOutlet private weak var stargazersLabel: UILabel!
+    @IBOutlet private weak var watchersLabel: UILabel!
+    @IBOutlet private weak var forksLabel: UILabel!
+    @IBOutlet private weak var issuesLabel: UILabel!
     
-    var vc1: SearchViewController!
+    var repository: RepositoryCodable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let repository = vc1.repositories[vc1.index]
-        languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
-        stargazersLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-        watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
-        forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
-        issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
+        languageLabel.text = "Written in \(repository?.language ?? "--")"
+        stargazersLabel.text = "\(repository?.stargazersCount ?? 0) stars"
+        watchersLabel.text = "\(repository?.watchersCount ?? 0) watchers"
+        forksLabel.text = "\(repository?.forksCount ?? 0) forks"
+        issuesLabel.text = "\(repository?.openIssuesCount ?? 0) open issues"
         getImage()
     }
     
-    func getImage(){
+    func getImage() {
         
-        let repository = vc1.repositories[vc1.index]
-        titleLabel.text = repository["full_name"] as? String
+        titleLabel.text = repository?.fullName
         
-        guard let owner = repository["owner"] as? [String: Any],
-              let imageUrl = owner["avatar_url"] as? String
+        let owner = repository?.owner
+        guard let imageUrl = owner?.avatarUrl,
+              let url = URL(string: imageUrl)
         else {
             return
         }
-        URLSession.shared.dataTask(with: URL(string: imageUrl)!) { (data, response, error) in
-            let image = UIImage(data: data!)!
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
             DispatchQueue.main.async {
-                self.avatarImageView.image = image
+                self.avatarImageView.image = UIImage(data: data)
             }
         }
         .resume()

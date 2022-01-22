@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34584A2A279B0353007882AD /* RepositoryCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A29279B0353007882AD /* RepositoryCodable.swift */; };
+		34584A2C279B0E9B007882AD /* SearchResultCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A2B279B0E9B007882AD /* SearchResultCodable.swift */; };
+		34584A2E279B0F01007882AD /* OwnerCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A2D279B0F01007882AD /* OwnerCodable.swift */; };
 		55DEE9DFEDABC214CB065655 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C45FD2586DC3D086AD1C202 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		8A6C6D225612E9FE5B458D58 /* Pods_iOSEngineerCodeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB06F4E74AC4BB229E89B6D6 /* Pods_iOSEngineerCodeCheck.framework */; };
 		BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */; };
@@ -39,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		34584A29279B0353007882AD /* RepositoryCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCodable.swift; sourceTree = "<group>"; };
+		34584A2B279B0E9B007882AD /* SearchResultCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCodable.swift; sourceTree = "<group>"; };
+		34584A2D279B0F01007882AD /* OwnerCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCodable.swift; sourceTree = "<group>"; };
 		3930FA501DA97A386005635F /* Pods_iOSEngineerCodeCheckTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheckTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45FD2586DC3D086AD1C202 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BFA297F4B518766ACEDF29 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheckTests/Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +112,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		34584A28279B0294007882AD /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				34584A2D279B0F01007882AD /* OwnerCodable.swift */,
+				34584A29279B0353007882AD /* RepositoryCodable.swift */,
+				34584A2B279B0E9B007882AD /* SearchResultCodable.swift */,
+			);
+			path = Codable;
+			sourceTree = "<group>";
+		};
 		4411D013AA7D6760AAFCA7B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +157,7 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				34584A28279B0294007882AD /* Codable */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				BFD945E2244DC5E80012785A /* SearchViewController.swift */,
@@ -393,6 +410,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945E3244DC5E80012785A /* SearchViewController.swift in Sources */,
+				34584A2C279B0E9B007882AD /* SearchResultCodable.swift in Sources */,
+				34584A2E279B0F01007882AD /* OwnerCodable.swift in Sources */,
+				34584A2A279B0353007882AD /* RepositoryCodable.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
