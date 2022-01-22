@@ -7,6 +7,10 @@ target 'iOSEngineerCodeCheck' do
 
   # Pods for iOSEngineerCodeCheck
 pod 'SwiftLint'
+pod 'RxSwift'
+pod 'RxCocoa'
+pod 'RxOptional'
+pod 'RxDataSources'
 
   target 'iOSEngineerCodeCheckTests' do
     inherit! :search_paths
