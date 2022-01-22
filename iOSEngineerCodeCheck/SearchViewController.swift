@@ -42,15 +42,15 @@ final class SearchViewController: UITableViewController, UISearchBarDelegate {
             return
         }
         
-        task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             guard let data = data,
                   let searchResult = try? JSONDecoder().decode(SearchResultCodable.self, from: data)
             else {
                 return
             }
-            self.repositories = searchResult.items
+            self?.repositories = searchResult.items
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
         task?.resume()
