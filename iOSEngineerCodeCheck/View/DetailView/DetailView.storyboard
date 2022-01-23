@@ -22,8 +22,8 @@
                                     <constraint firstAttribute="width" secondItem="Cb3-6N-3D3" secondAttribute="height" multiplier="1:1" id="8tn-Zc-67T"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOf-bp-zxy">
-                                <rect key="frame" x="184" y="532" width="46.5" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOf-bp-zxy">
+                                <rect key="frame" x="20" y="532" width="374" height="30"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -74,8 +74,10 @@
                         <constraints>
                             <constraint firstItem="wOf-bp-zxy" firstAttribute="centerX" secondItem="Cb3-6N-3D3" secondAttribute="centerX" id="Bt1-bF-USW"/>
                             <constraint firstItem="yD1-ol-wuW" firstAttribute="trailing" secondItem="Cb3-6N-3D3" secondAttribute="trailing" constant="20" id="DM6-55-TXK"/>
+                            <constraint firstItem="wOf-bp-zxy" firstAttribute="leading" secondItem="yD1-ol-wuW" secondAttribute="leading" constant="20" id="LNL-aq-Y1N"/>
                             <constraint firstItem="XKe-xC-Yog" firstAttribute="centerX" secondItem="wOf-bp-zxy" secondAttribute="centerX" id="OhX-49-3qX"/>
                             <constraint firstItem="XKe-xC-Yog" firstAttribute="top" secondItem="wOf-bp-zxy" secondAttribute="bottom" constant="28" id="WGr-hD-9Nc"/>
+                            <constraint firstItem="yD1-ol-wuW" firstAttribute="trailing" secondItem="wOf-bp-zxy" secondAttribute="trailing" constant="20" id="eOW-hh-ZZY"/>
                             <constraint firstItem="Cb3-6N-3D3" firstAttribute="leading" secondItem="yD1-ol-wuW" secondAttribute="leading" constant="20" id="izO-dE-BMr"/>
                             <constraint firstItem="XKe-xC-Yog" firstAttribute="width" secondItem="Cb3-6N-3D3" secondAttribute="width" id="raF-Nz-KKM"/>
                             <constraint firstItem="wOf-bp-zxy" firstAttribute="top" secondItem="Cb3-6N-3D3" secondAttribute="bottom" constant="28" id="uVk-PO-acz"/>

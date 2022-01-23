@@ -16,7 +16,6 @@ final class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     
-    private var repositories: [RepositoryCodable] = []
     private var viewModel: SearchViewModel?
     private var disposeBag = DisposeBag()
     
@@ -43,7 +42,7 @@ final class SearchViewController: UIViewController {
         
         // RxDataSources
         let dataSource = RxTableViewSectionedReloadDataSource<SearchResultSectionModel> { datasource, tableView, indexPath, item in
-            let cell = UITableViewCell()
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
             cell.textLabel?.text = item.repository.fullName
             cell.detailTextLabel?.text = item.repository.language
             cell.tag = indexPath.row

@@ -18,7 +18,6 @@ struct RepositoryCodable: Codable {
     let forksCount: Int
     let openIssuesCount: Int
     let owner: OwnerCodable
-    let name: String
     
     enum CodingKeys: String, CodingKey {
         
@@ -29,6 +28,5 @@ struct RepositoryCodable: Codable {
         case forksCount = "forks_count"
         case openIssuesCount = "open_issues_count"
         case owner
-        case name
     }
 }
