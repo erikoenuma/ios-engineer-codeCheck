@@ -23,6 +23,7 @@ final class DetailViewController: UIViewController {
     
     private let viewModel = DetailViewModel()
     private let disposeBag = DisposeBag()
+    private var htmlURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ final class DetailViewController: UIViewController {
     }
     
     static func configure(repository: RepositoryCodable) -> DetailViewController {
+        
         let vc = UIStoryboard(name: "DetailView", bundle: nil).instantiateInitialViewController() as! DetailViewController
         vc.viewModel.input.configureWith(repository: repository)
         return vc
@@ -67,5 +69,17 @@ final class DetailViewController: UIViewController {
                 self?.avatarImageView.kf.setImage(with: url)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.output.htmlURL
+            .subscribe(onNext: { [weak self] url in
+                self?.htmlURL = url
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    @IBAction private func tappedGithubButton(_ sender: Any) {
+        let vc = GithubViewController()
+        vc.url = self.htmlURL
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

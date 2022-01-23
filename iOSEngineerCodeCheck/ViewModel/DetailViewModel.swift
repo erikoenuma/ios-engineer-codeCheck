@@ -23,6 +23,7 @@ protocol DetailViewModelOutput {
     var forksCountText: BehaviorRelay<String> { get }
     var issuesCountText: BehaviorRelay<String> { get }
     var avatarImageURL: BehaviorRelay<URL?> { get }
+    var htmlURL: BehaviorRelay<URL?> { get }
 }
 
 final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
@@ -41,6 +42,7 @@ final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
         forksCountText.accept("\(repository.forksCount) forks")
         issuesCountText.accept("\(repository.openIssuesCount) open issues")
         avatarImageURL.accept(URL(string: repository.owner.avatarUrl))
+        htmlURL.accept(URL(string: repository.htmlURL))
     }
     
     // Output
@@ -51,4 +53,5 @@ final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
     lazy var forksCountText = BehaviorRelay<String>(value: "")
     lazy var issuesCountText = BehaviorRelay<String>(value: "")
     lazy var avatarImageURL = BehaviorRelay<URL?>(value: nil)
+    lazy var htmlURL = BehaviorRelay<URL?>(value: nil)
 }
