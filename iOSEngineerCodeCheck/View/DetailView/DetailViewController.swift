@@ -30,7 +30,7 @@ final class DetailViewController: UIViewController {
     }
     
     static func configure(repository: RepositoryCodable) -> DetailViewController {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Detail") as! DetailViewController
+        let vc = UIStoryboard(name: "DetailView", bundle: nil).instantiateInitialViewController() as! DetailViewController
         vc.viewModel.input.configureWith(repository: repository)
         return vc
     }
