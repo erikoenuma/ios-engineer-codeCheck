@@ -16,7 +16,6 @@ final class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     
-    private var repositories: [RepositoryCodable] = []
     private var viewModel: SearchViewModel?
     private var disposeBag = DisposeBag()
     
