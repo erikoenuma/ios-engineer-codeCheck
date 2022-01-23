@@ -22,7 +22,7 @@ protocol DetailViewModelOutput {
     var watchersCountText: BehaviorRelay<String> { get }
     var forksCountText: BehaviorRelay<String> { get }
     var issuesCountText: BehaviorRelay<String> { get }
-    var avatarImage: BehaviorRelay<UIImage> { get }
+    var avatarImageURL: BehaviorRelay<URL?> { get }
 }
 
 final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
@@ -30,8 +30,6 @@ final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
     var input: DetailViewModelInput { return self }
     var output: DetailViewModelOutput { return self }
     private let disposeBag = DisposeBag()
-    // UIImageを取得するURL
-    private var imageURLString = PublishRelay<String>()
     
     // Input
     func configureWith(repository: RepositoryCodable) {
@@ -42,7 +40,7 @@ final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
         watchersCountText.accept("\(repository.watchersCount) watchers")
         forksCountText.accept("\(repository.forksCount) forks")
         issuesCountText.accept("\(repository.openIssuesCount) open issues")
-        self.imageURLString.accept(repository.owner.avatarUrl)
+        avatarImageURL.accept(URL(string: repository.owner.avatarUrl))
     }
     
     // Output
@@ -52,29 +50,5 @@ final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
     lazy var watchersCountText = BehaviorRelay<String>(value: "")
     lazy var forksCountText = BehaviorRelay<String>(value: "")
     lazy var issuesCountText = BehaviorRelay<String>(value: "")
-    lazy var avatarImage = BehaviorRelay<UIImage>(value: UIImage())
-    
-    // MARK: -
-    
-    init() {
-        
-        imageURLString
-            .map { URL(string: $0) }
-            .filterNil()
-            .flatMapLatest { url in
-                ImageAPI.shared.rx.getImage(url: url)
-            }
-            .flatMapLatest { result -> Observable<UIImage> in
-                
-                switch result {
-                case .success(let image):
-                    return Observable.just(image)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    return Observable.just(UIImage())
-                }
-            }
-            .bind(to: avatarImage)
-            .disposed(by: disposeBag)
-    }
+    lazy var avatarImageURL = BehaviorRelay<URL?>(value: nil)
 }

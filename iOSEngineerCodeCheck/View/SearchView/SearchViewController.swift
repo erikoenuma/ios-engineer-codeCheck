@@ -62,5 +62,12 @@ final class SearchViewController: UIViewController {
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        // エラーメッセージ表示
+        viewModel?.output.showError
+            .subscribe(onNext: { [weak self] error in
+                self?.showErrorMessage(of: error)
+            })
+            .disposed(by: disposeBag)
     }
 }
