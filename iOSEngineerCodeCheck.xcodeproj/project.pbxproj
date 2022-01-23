@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		344E4062279DAD1F006B1B71 /* RepositoryCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E4061279DAD1F006B1B71 /* RepositoryCodableTests.swift */; };
+		344E4069279DB7FA006B1B71 /* RepositoryAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E4068279DB7FA006B1B71 /* RepositoryAPITests.swift */; };
+		344E406B279DBBC5006B1B71 /* DataUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E406A279DBBC5006B1B71 /* DataUtility.swift */; };
+		344E406D279DBD03006B1B71 /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 344E406C279DBD03006B1B71 /* Repository.json */; };
 		34584A2A279B0353007882AD /* RepositoryCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A29279B0353007882AD /* RepositoryCodable.swift */; };
 		34584A2C279B0E9B007882AD /* SearchResultCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A2B279B0E9B007882AD /* SearchResultCodable.swift */; };
 		34584A2E279B0F01007882AD /* OwnerCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A2D279B0F01007882AD /* OwnerCodable.swift */; };
@@ -51,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		344E4061279DAD1F006B1B71 /* RepositoryCodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCodableTests.swift; sourceTree = "<group>"; };
+		344E4068279DB7FA006B1B71 /* RepositoryAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryAPITests.swift; sourceTree = "<group>"; };
+		344E406A279DBBC5006B1B71 /* DataUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtility.swift; sourceTree = "<group>"; };
+		344E406C279DBD03006B1B71 /* Repository.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
 		34584A29279B0353007882AD /* RepositoryCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCodable.swift; sourceTree = "<group>"; };
 		34584A2B279B0E9B007882AD /* SearchResultCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCodable.swift; sourceTree = "<group>"; };
 		34584A2D279B0F01007882AD /* OwnerCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCodable.swift; sourceTree = "<group>"; };
@@ -130,6 +138,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		344E4063279DAD9F006B1B71 /* TestJSON */ = {
+			isa = PBXGroup;
+			children = (
+				344E406A279DBBC5006B1B71 /* DataUtility.swift */,
+				344E406C279DBD03006B1B71 /* Repository.json */,
+			);
+			path = TestJSON;
+			sourceTree = "<group>";
+		};
 		34584A28279B0294007882AD /* Codable */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +160,7 @@
 		34584A31279BD653007882AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				344E4063279DAD9F006B1B71 /* TestJSON */,
 				34584A3B279BF26B007882AD /* API */,
 				34584A28279B0294007882AD /* Codable */,
 				34584A37279BDCFB007882AD /* SearchResultSectionModel.swift */,
@@ -266,6 +284,8 @@
 			children = (
 				BFD945F5244DC5EB0012785A /* iOSEngineerCodeCheckTests.swift */,
 				BFD945F7244DC5EB0012785A /* Info.plist */,
+				344E4061279DAD1F006B1B71 /* RepositoryCodableTests.swift */,
+				344E4068279DB7FA006B1B71 /* RepositoryAPITests.swift */,
 			);
 			path = iOSEngineerCodeCheckTests;
 			sourceTree = "<group>";
@@ -391,6 +411,7 @@
 			files = (
 				BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */,
 				34584A42279D7EEA007882AD /* SearchView.storyboard in Resources */,
+				344E406D279DBD03006B1B71 /* Repository.json in Resources */,
 				BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */,
 				34584A46279D7F7C007882AD /* DetailView.storyboard in Resources */,
 			);
@@ -547,6 +568,7 @@
 				34584A4C279D8B74007882AD /* APIUtility.swift in Sources */,
 				34584A2E279B0F01007882AD /* OwnerCodable.swift in Sources */,
 				34584A2A279B0353007882AD /* RepositoryCodable.swift in Sources */,
+				344E406B279DBBC5006B1B71 /* DataUtility.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				34584A3D279D446B007882AD /* DetailViewModel.swift in Sources */,
@@ -559,6 +581,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344E4069279DB7FA006B1B71 /* RepositoryAPITests.swift in Sources */,
+				344E4062279DAD1F006B1B71 /* RepositoryCodableTests.swift in Sources */,
 				BFD945F6244DC5EB0012785A /* iOSEngineerCodeCheckTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
