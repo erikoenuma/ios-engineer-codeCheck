@@ -18,6 +18,7 @@ protocol SearchViewModelInput {
 
 protocol SearchViewModelOutput {
     var dataRelay: BehaviorRelay<[SearchResultSectionModel]> { get }
+    var showError: PublishRelay<APIError> { get }
 }
 
 final class SearchViewModel: SearchViewModelInput, SearchViewModelOutput {
@@ -39,6 +40,7 @@ final class SearchViewModel: SearchViewModelInput, SearchViewModelOutput {
     
     // Output
     lazy var dataRelay = BehaviorRelay<[SearchResultSectionModel]>(value: [])
+    lazy var showError = PublishRelay<APIError>()
     
     // MARK: -
     
@@ -55,7 +57,7 @@ final class SearchViewModel: SearchViewModelInput, SearchViewModelOutput {
             .withLatestFrom(_searchWord)
             .filterNil()
             .distinctUntilChanged()
-            .flatMapLatest { searchWord -> Observable<Result<[RepositoryCodable], Error>> in
+            .flatMapLatest { searchWord -> Observable<Result<[RepositoryCodable], APIError>> in
                 RepositoryAPI.shared.rx.getRepositories(by: searchWord)
             }
             .flatMapLatest { [weak self] result -> Observable<[SearchResultSectionModel]> in
@@ -72,7 +74,8 @@ final class SearchViewModel: SearchViewModelInput, SearchViewModelOutput {
                     self.sectionModel = [SearchResultSectionModel(identity: 0, items: cellModels)]
                     return Observable.just(self.sectionModel)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    // エラーが起きている通知を送る
+                    self.showError.accept(error)
                     return Observable.just([])
                 }
             }
