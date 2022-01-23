@@ -12,6 +12,7 @@ pod 'RxCocoa'
 pod 'RxOptional'
 pod 'RxDataSources'
 pod 'Alamofire'
+pod 'Kingfisher'
 
   target 'iOSEngineerCodeCheckTests' do
     inherit! :search_paths

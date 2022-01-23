@@ -6,6 +6,7 @@
 //  Copyright © 2020 YUMEMI Inc. All rights reserved.
 //
 
+import Kingfisher
 import RxCocoa
 import RxSwift
 import UIKit
@@ -61,8 +62,10 @@ final class DetailViewController: UIViewController {
             .bind(to: issuesLabel.rx.text.asObserver())
             .disposed(by: disposeBag)
         
-        viewModel.output.avatarImage
-            .bind(to: avatarImageView.rx.image.asObserver())
+        viewModel.output.avatarImageURL
+            .subscribe(onNext: { [weak self] url in
+                self?.avatarImageView.kf.setImage(with: url)
+            })
             .disposed(by: disposeBag)
     }
 }
