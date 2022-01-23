@@ -22,6 +22,8 @@ protocol SearchViewModelOutput {
 
 final class SearchViewModel: SearchViewModelInput, SearchViewModelOutput {
     
+    var input: SearchViewModelInput { return self }
+    var output: SearchViewModelOutput { return self }
     private let disposeBag = DisposeBag()
     private var sectionModel: [SearchResultSectionModel] = []
     

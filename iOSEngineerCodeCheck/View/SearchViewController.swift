@@ -17,9 +17,7 @@ final class SearchViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     private var repositories: [RepositoryCodable] = []
-    private var viewModel: SearchViewModel!
-    lazy var input: SearchViewModelInput = viewModel
-    lazy var output: SearchViewModelOutput = viewModel
+    private var viewModel: SearchViewModel?
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -32,9 +30,12 @@ final class SearchViewController: UIViewController {
     
     private func bindInputStream() {
         
+        guard let viewModel = viewModel else {
+            return
+        }
         searchBar.rx.text
             .asObservable()
-            .bind(to: input.searchWordObserver)
+            .bind(to: viewModel.input.searchWordObserver)
             .disposed(by: disposeBag)
     }
     
@@ -50,7 +51,7 @@ final class SearchViewController: UIViewController {
         }
         
         // tableViewにdataを流す
-        output.dataRelay.asObservable()
+        viewModel?.output.dataRelay.asObservable()
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
