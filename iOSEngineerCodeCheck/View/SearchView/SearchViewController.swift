@@ -62,6 +62,13 @@ final class SearchViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        // tableViewのセルをタップした時にdeselectする
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         // エラーメッセージ表示
         viewModel?.output.showError
             .subscribe(onNext: { [weak self] error in
