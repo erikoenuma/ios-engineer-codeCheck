@@ -6,7 +6,6 @@
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
 
-import SVProgressHUD
 import UIKit
 import WebKit
 
@@ -14,7 +13,6 @@ final class GithubViewController: UIViewController {
     
     private let githubView = WKWebView(frame: .zero)
     var url: URL?
-    private let viewModel = GithubViewModel()
     
     override func loadView() {
         self.view = githubView
