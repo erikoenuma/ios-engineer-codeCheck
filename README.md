@@ -1,5 +1,38 @@
 # 株式会社ゆめみ iOS エンジニアコードチェック課題
 
+## 環境
+
+- Swift5.5
+- Xcode13.1
+- 開発ターゲット
+- サードパーティーライブラリ：CocoaPodsで以下のライブラリを使用しています。
+  - Alamofire
+  - SwiftLint
+  - RxSwift
+  - RxCocoa
+  - RxOptional
+  - RxDataSources
+  - Kingfisher
+
+## 機能
+
+- 検索ワードからレポジトリを検索し、結果一覧をTableViewに表示させる
+- 特定の結果を選択したら、該当リポジトリのリポジトリ名、オーナーアイコン、プロジェクト言語、Star数、Fork数、Watcher数、OpenIssue数、Readmeを表示
+- リポジトリの詳細画面のNavigationBar上のボタンを選択すると、githubのwebページを表示
+
+## 工夫した点
+
+- MVVMアーキテクチャを採用し、Viewとドメインを切り分けた
+- [公式リファレンス](https://docs.github.com/ja/rest/reference/search)を参照しながらエラーハンドリングを行なった
+
+## 日誌を書きました
+開発中にハマった所や反省点などをNotionに書いています。
+よろしければご覧ください。
+https://lacy-trouser-2c9.notion.site/7e2fe59040ec4606a650b574eac0f933
+
+
+以下、課題の原文です。
+
 ## 概要
 
 本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に iOS エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の概要を詳しく読んだ上で課題を取り組んでください。
