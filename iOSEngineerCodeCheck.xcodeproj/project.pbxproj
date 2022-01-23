@@ -13,6 +13,8 @@
 		34584A35279BD8BB007882AD /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A34279BD8BB007882AD /* SearchViewModel.swift */; };
 		34584A38279BDCFB007882AD /* SearchResultSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A37279BDCFB007882AD /* SearchResultSectionModel.swift */; };
 		34584A3A279BEFA8007882AD /* RepositoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A39279BEFA7007882AD /* RepositoryAPI.swift */; };
+		34584A3D279D446B007882AD /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A3C279D446B007882AD /* DetailViewModel.swift */; };
+		34584A3F279D472C007882AD /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34584A3E279D472B007882AD /* ImageAPI.swift */; };
 		55DEE9DFEDABC214CB065655 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C45FD2586DC3D086AD1C202 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		8A6C6D225612E9FE5B458D58 /* Pods_iOSEngineerCodeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB06F4E74AC4BB229E89B6D6 /* Pods_iOSEngineerCodeCheck.framework */; };
 		BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* DetailViewController.swift */; };
@@ -51,6 +53,8 @@
 		34584A34279BD8BB007882AD /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		34584A37279BDCFB007882AD /* SearchResultSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSectionModel.swift; sourceTree = "<group>"; };
 		34584A39279BEFA7007882AD /* RepositoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryAPI.swift; sourceTree = "<group>"; };
+		34584A3C279D446B007882AD /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		34584A3E279D472B007882AD /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 		3930FA501DA97A386005635F /* Pods_iOSEngineerCodeCheckTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheckTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C45FD2586DC3D086AD1C202 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BFA297F4B518766ACEDF29 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheckTests/Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				34584A34279BD8BB007882AD /* SearchViewModel.swift */,
+				34584A3C279D446B007882AD /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				34584A39279BEFA7007882AD /* RepositoryAPI.swift */,
+				34584A3E279D472B007882AD /* ImageAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -495,6 +501,8 @@
 				34584A2A279B0353007882AD /* RepositoryCodable.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* DetailViewController.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				34584A3D279D446B007882AD /* DetailViewModel.swift in Sources */,
+				34584A3F279D472C007882AD /* ImageAPI.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

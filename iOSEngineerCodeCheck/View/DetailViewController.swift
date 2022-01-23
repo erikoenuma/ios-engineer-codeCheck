@@ -6,6 +6,8 @@
 //  Copyright © 2020 YUMEMI Inc. All rights reserved.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 
 final class DetailViewController: UIViewController {
@@ -18,37 +20,49 @@ final class DetailViewController: UIViewController {
     @IBOutlet private weak var forksLabel: UILabel!
     @IBOutlet private weak var issuesLabel: UILabel!
     
-    var repository: RepositoryCodable?
+    private let viewModel = DetailViewModel()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        languageLabel.text = "Written in \(repository?.language ?? "--")"
-        stargazersLabel.text = "\(repository?.stargazersCount ?? 0) stars"
-        watchersLabel.text = "\(repository?.watchersCount ?? 0) watchers"
-        forksLabel.text = "\(repository?.forksCount ?? 0) forks"
-        issuesLabel.text = "\(repository?.openIssuesCount ?? 0) open issues"
-        getImage()
+        bindOutputStream()
     }
     
-    func getImage() {
+    static func configure(repository: RepositoryCodable) -> DetailViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Detail") as! DetailViewController
+        vc.viewModel.input.configureWith(repository: repository)
+        return vc
+    }
+    
+    private func bindOutputStream() {
         
-        titleLabel.text = repository?.fullName
+        viewModel.output.titleText
+            .bind(to: titleLabel.rx.text.asObserver())
+            .disposed(by: disposeBag)
         
-        let owner = repository?.owner
-        guard let imageUrl = owner?.avatarUrl,
-              let url = URL(string: imageUrl)
-        else {
-            return
-        }
-        URLSession.shared.dataTask(with: url) { [weak self](data, response, error) in
-            guard let data = data else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.avatarImageView.image = UIImage(data: data)
-            }
-        }
-        .resume()
+        viewModel.output.languageText
+            .bind(to: languageLabel.rx.text.asObserver())
+            .disposed(by: disposeBag)
+        
+        viewModel.output.stargazersCountText
+            .bind(to: stargazersLabel.rx.text.asObserver())
+            .disposed(by: disposeBag)
+        
+        viewModel.output.forksCountText
+            .bind(to: forksLabel.rx.text.asObserver())
+            .disposed(by: disposeBag)
+        
+        viewModel.output.watchersCountText
+            .bind(to: watchersLabel.rx.text.asObserver())
+            .disposed(by: disposeBag)
+        
+        viewModel.output.issuesCountText
+            .bind(to: issuesLabel.rx.text.asObserver())
+            .disposed(by: disposeBag)
+        
+        viewModel.output.avatarImage
+            .bind(to: avatarImageView.rx.image.asObserver())
+            .disposed(by: disposeBag)
     }
 }

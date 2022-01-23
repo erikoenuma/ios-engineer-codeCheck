@@ -58,15 +58,9 @@ final class SearchViewController: UIViewController {
         // tableViewのセルをタップした時の処理
         tableView.rx.modelSelected(SearchResultCellModel.self)
             .subscribe(onNext: { [weak self] item in
-                self?.performSegue(withIdentifier: "Detail", sender: item.repository)
-            }).disposed(by: disposeBag)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let vc = segue.destination as? DetailViewController,
-           let repository = sender as? RepositoryCodable {
-            vc.repository = repository
-        }
+                let vc = DetailViewController.configure(repository: item.repository)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
