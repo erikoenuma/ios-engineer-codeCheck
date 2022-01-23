@@ -25,8 +25,6 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar.text = "GitHubのリポジトリを検索できるよー"
-        
         self.viewModel = SearchViewModel(searchButtonTap: searchBar.rx.searchButtonClicked.asSignal())
         bindInputStream()
         bindOutputStream()

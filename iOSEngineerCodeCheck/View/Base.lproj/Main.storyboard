@@ -125,7 +125,7 @@
                                 <rect key="frame" x="0.0" y="139" width="414" height="723"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="hXF-Jz-NKK">
+                            <searchBar contentMode="redraw" placeholder="GitHubのリポジトリを検索できるよー" translatesAutoresizingMaskIntoConstraints="NO" id="hXF-Jz-NKK">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
